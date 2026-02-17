@@ -1,0 +1,65 @@
+# IDE ve Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+error_log
+access_log
+
+# Temporary files
+tmp/
+temp/
+cache/
+*.tmp
+
+# OS
+Thumbs.db
+desktop.ini
+
+# PHP
+vendor/
+composer.lock
+
+# Session files
+sessions/
+
+# Upload files (eğer kullanıcı yüklemeleri varsa)
+uploads/
+files/
+
+# Environment
+.env
+.env.local
+
+# Database (eğer SQLite kullanılırsa)
+*.sqlite
+*.db
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Node modules (eğer frontend build varsa)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Video dosyaları (çok büyük)
+assets/videos/
+assets/images/course/video/
+*.mp4

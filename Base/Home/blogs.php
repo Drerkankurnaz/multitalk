@@ -1,0 +1,38 @@
+<?php
+$blogs = [
+];
+?>
+
+<?php foreach ($blogs as $item): ?>
+<div
+    class="group relative h-fit overflow-hidden bg-white dark:bg-slate-900 rounded-md shadow dark:shadow-gray-700 transition-all duration-500">
+    <div class="relative overflow-hidden">
+        <img src="<?php echo $static_url, $item['img']; ?>" class="" alt="">
+        <div class="absolute start-6 bottom-6">
+            <span
+                class="bg-violet-600 text-white text-[12px] px-2.5 py-1 rounded-md h-4"><?php echo $item['name']; ?></span>
+        </div>
+    </div>
+
+    <div class="relative p-6">
+        <div class="">
+            <div class="flex justify-between mb-4">
+                <span class="text-slate-400 text-sm flex items-center"><i data-feather="calendar"
+                        class="size-4 me-1"></i> 3rd Oct 24</span>
+                <span class="text-slate-400 text-sm flex items-center"><i data-feather="clock" class="size-4 me-1"></i>
+                    5 Min</span>
+            </div>
+
+            <a href="blog-detail.php?id=<?php echo $item['id']; ?>"
+                class="text-lg hover:text-violet-600 font-medium"><?php echo $item['title']; ?></a>
+
+            <div class="mt-3">
+                <a href="blog-detail.php?id=<?php echo $item['id']; ?>"
+                    class="btn btn-link hover:text-violet-600 after:bg-violet-600 duration-500 ease-in-out">Devamını Gör <i
+                        class="mdi mdi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end content-->
+<?php endforeach; ?>

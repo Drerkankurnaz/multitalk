@@ -1,0 +1,61 @@
+services:
+  web:
+    build: .
+    container_name: lms-web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - PHP_MEMORY_LIMIT=256M
+      - PHP_UPLOAD_MAX_FILESIZE=50M
+      - PHP_POST_MAX_SIZE=50M
+      - DB_HOST=db
+      - DB_NAME=lms_db
+      - DB_USER=lms_user
+      - DB_PASS=lms_pass
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - lms-network
+
+  db:
+    image: mysql:8.0
+    container_name: lms-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lms_db
+      MYSQL_USER: lms_user
+      MYSQL_PASSWORD: lms_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - lms-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: lms-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - lms-network
+
+networks:
+  lms-network:
+    driver: bridge
+
+volumes:
+  db_data:
