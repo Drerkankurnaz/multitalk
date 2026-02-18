@@ -101,7 +101,7 @@ if ($auth->isLoggedIn()) {
 
             <div class="mt-4 sm:mt-6 text-center">
                 <p class="text-slate-600 text-sm sm:text-base">Zaten hesabınız var mı? 
-                    <a href="lms-login.php" class="text-violet-600 hover:text-violet-700 font-medium">Giriş Yapın</a>
+                    <a href="login.php" class="text-violet-600 hover:text-violet-700 font-medium">Giriş Yapın</a>
                 </p>
             </div>
         </div>

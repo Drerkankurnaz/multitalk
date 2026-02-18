@@ -5,7 +5,7 @@ require_once 'php/video.php';
 
 $auth = new Auth();
 if (!$auth->isLoggedIn()) {
-    header('Location: lms-login.php');
+    header('Location: login.php');
     exit;
 }
 

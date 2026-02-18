@@ -6,12 +6,13 @@ require_once 'php/certificate.php';
 
 $auth = new Auth();
 if (!$auth->isLoggedIn()) {
-    header('Location: lms-login.php');
+    header('Location: login.php');
     exit;
 }
 
 $videoManager = new Video();
-if (!$videoManager->isAllCompleted($_SESSION['user_id'])) {
+$selectedLang = $_SESSION['selected_lang'] ?? 'tr';
+if (!$videoManager->isAllCompleted($_SESSION['user_id'], $selectedLang)) {
     header('Location: lms-dashboard.php');
     exit;
 }
@@ -55,9 +56,14 @@ $certificate = $certificateManager->getOrCreateCertificate($_SESSION['user_id'])
                         <p class="text-xs text-slate-400 font-medium hidden sm:block">Diyaloglarla Yabancı Dil Öğretimi</p>
                     </div>
                 </div>
-                <button onclick="window.print()" class="bg-violet-600 hover:bg-violet-700 text-white px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base">
-                    <i class="mdi mdi-printer"></i> <span class="hidden sm:inline">Yazdır</span>
-                </button>
+                <div class="flex items-center space-x-2">
+                    <button onclick="downloadCertificate()" class="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base">
+                        <i class="mdi mdi-download"></i> <span class="hidden sm:inline">İndir</span>
+                    </button>
+                    <button onclick="window.print()" class="bg-violet-600 hover:bg-violet-700 text-white px-3 sm:px-4 py-2 rounded-lg transition text-sm sm:text-base">
+                        <i class="mdi mdi-printer"></i> <span class="hidden sm:inline">Yazdır</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -115,5 +121,36 @@ $certificate = $certificateManager->getOrCreateCertificate($_SESSION['user_id'])
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function downloadCertificate() {
+            const btn = document.querySelector('[onclick="downloadCertificate()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="mdi mdi-loading mdi-spin"></i> <span class="hidden sm:inline">Hazırlanıyor...</span>';
+            btn.disabled = true;
+
+            const cert = document.querySelector('.certificate-border').parentElement;
+            
+            html2canvas(cert, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'MultiTalk-Sertifika-<?php echo date("Y-m-d"); ?>.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }).catch(err => {
+                console.error('İndirme hatası:', err);
+                alert('Sertifika indirilemedi. Lütfen "Yazdır" butonunu kullanarak PDF olarak kaydedin.');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+    </script>
 </body>
 </html>

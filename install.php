@@ -105,7 +105,7 @@ try {
                    class="flex-1 bg-violet-600 hover:bg-violet-700 text-white text-center font-medium py-3 rounded-lg transition">
                     <i class="mdi mdi-account-plus"></i> Kayıt Ol
                 </a>
-                <a href="lms-login.php" 
+                <a href="login.php" 
                    class="flex-1 bg-slate-600 hover:bg-slate-700 text-white text-center font-medium py-3 rounded-lg transition">
                     <i class="mdi mdi-login"></i> Giriş Yap
                 </a>

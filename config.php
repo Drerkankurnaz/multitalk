@@ -77,14 +77,21 @@ $LANGUAGES = [
 
 // Temalar - Merkezi tema tanımları
 $THEMES = [
-    'supermarket' => ['name' => 'Süpermarkette', 'icon' => 'mdi-cart', 'color' => 'blue', 'description' => 'Alışveriş süreçlerinde temel soru-cevap ve işlem diyalogları', 'duration' => '2:30', 'thumbnail' => 'assets/images/course/1.jpg'],
-    'restaurant' => ['name' => 'Restoranda', 'icon' => 'mdi-silverware-fork-knife', 'color' => 'red', 'description' => 'Sipariş verme, tercih belirtme ve sosyal nezaket kalıpları', 'duration' => '3:15', 'thumbnail' => 'assets/images/course/2.jpg'],
-    'hotel' => ['name' => 'Otelde', 'icon' => 'mdi-bed', 'color' => 'purple', 'description' => 'Rezervasyon, giriş-çıkış ve konaklama iletişimi', 'duration' => '2:45', 'thumbnail' => 'assets/images/course/3.jpg'],
-    'hospital' => ['name' => 'Hastanede', 'icon' => 'mdi-hospital-building', 'color' => 'green', 'description' => 'Randevu, durum anlatma ve yönlendirme etkileşimleri', 'duration' => '3:00', 'thumbnail' => 'assets/images/course/4.jpg'],
-    'pharmacy' => ['name' => 'Eczanede', 'icon' => 'mdi-pill', 'color' => 'pink', 'description' => 'İlaç talebi, kullanım bilgisi alma ve danışma konuşmaları', 'duration' => '2:20', 'thumbnail' => 'assets/images/course/5.jpg'],
-    'bank' => ['name' => 'Bankada', 'icon' => 'mdi-bank', 'color' => 'indigo', 'description' => 'Günlük finansal işlemlerde temel iletişim kalıpları', 'duration' => '2:50', 'thumbnail' => 'assets/images/course/6.jpg'],
-    'city' => ['name' => 'Şehirde', 'icon' => 'mdi-city', 'color' => 'yellow', 'description' => 'Yol sorma, ulaşım ve kamu alanı iletişim senaryoları', 'duration' => '2:40', 'thumbnail' => 'assets/images/course/7.jpg'],
-    'wedding' => ['name' => 'Düğünde', 'icon' => 'mdi-party-popper', 'color' => 'orange', 'description' => 'Tebrik, tanışma ve kültürel sosyal etkileşim diyalogları', 'duration' => '3:10', 'thumbnail' => 'assets/images/course/8.jpg']
+    'giris' => ['name' => 'Giriş', 'icon' => 'mdi-hand-wave', 'color' => 'blue', 'description' => 'Temel tanışma diyalogları ve selamlaşma ifadeleri', 'duration' => '2:30', 'thumbnail' => 'assets/images/course/1.jpg'],
+    'yolda' => ['name' => 'Yolda', 'icon' => 'mdi-road-variant', 'color' => 'green', 'description' => 'Yol sorma, yön tarifi ve ulaşım diyalogları', 'duration' => '3:00', 'thumbnail' => 'assets/images/course/2.jpg'],
+    'telefonda' => ['name' => 'Telefonda', 'icon' => 'mdi-phone', 'color' => 'purple', 'description' => 'Telefon görüşmesi ve iletişim diyalogları', 'duration' => '2:45', 'thumbnail' => 'assets/images/course/3.jpg'],
+    'universitede' => ['name' => 'Üniversitede', 'icon' => 'mdi-school', 'color' => 'indigo', 'description' => 'Üniversite ortamında günlük iletişim diyalogları', 'duration' => '3:15', 'thumbnail' => 'assets/images/course/4.jpg'],
+    'supermarket' => ['name' => 'Süpermarkette', 'icon' => 'mdi-cart', 'color' => 'orange', 'description' => 'Süpermarkette alışveriş ve fiyat sorma diyalogları', 'duration' => '2:50', 'thumbnail' => 'assets/images/course/5.jpg'],
+    'evde' => ['name' => 'Evde', 'icon' => 'mdi-home', 'color' => 'red', 'description' => 'Ev ortamında günlük yaşam diyalogları', 'duration' => '2:40', 'thumbnail' => 'assets/images/course/6.jpg'],
+    'restaurant' => ['name' => 'Restoranda', 'icon' => 'mdi-silverware-fork-knife', 'color' => 'red', 'description' => 'Restoranda sipariş verme ve hesap ödeme diyalogları', 'duration' => '3:10', 'thumbnail' => 'assets/images/course/7.jpg'],
+    'magazada' => ['name' => 'Mağazada', 'icon' => 'mdi-store', 'color' => 'pink', 'description' => 'Mağazada alışveriş ve ürün sorma diyalogları', 'duration' => '2:30', 'thumbnail' => 'assets/images/course/8.jpg'],
+    'garda' => ['name' => 'Garda', 'icon' => 'mdi-train', 'color' => 'yellow', 'description' => 'Tren garında bilet alma ve seyahat diyalogları', 'duration' => '2:45', 'thumbnail' => 'assets/images/course/9.jpg'],
+    'hotel' => ['name' => 'Otelde', 'icon' => 'mdi-bed', 'color' => 'purple', 'description' => 'Otel rezervasyonu, giriş-çıkış ve konaklama diyalogları', 'duration' => '3:00', 'thumbnail' => 'assets/images/course/10.jpg'],
+    'sehirde' => ['name' => 'Şehirde', 'icon' => 'mdi-city', 'color' => 'blue', 'description' => 'Şehirde yol sorma, ulaşım ve kamu alanı diyalogları', 'duration' => '2:50', 'thumbnail' => 'assets/images/course/11.jpg'],
+    'dugunde' => ['name' => 'Düğünde', 'icon' => 'mdi-party-popper', 'color' => 'orange', 'description' => 'Düğün ortamında tebrik, tanışma ve sosyal etkileşim diyalogları', 'duration' => '3:10', 'thumbnail' => 'assets/images/course/12.jpg'],
+    'hospital' => ['name' => 'Hastanede', 'icon' => 'mdi-hospital-building', 'color' => 'green', 'description' => 'Hastanede randevu, muayene ve tedavi diyalogları', 'duration' => '3:00', 'thumbnail' => 'assets/images/course/4.jpg'],
+    'pharmacy' => ['name' => 'Eczanede', 'icon' => 'mdi-pill', 'color' => 'pink', 'description' => 'Eczanede ilaç talebi, kullanım bilgisi ve danışma diyalogları', 'duration' => '2:20', 'thumbnail' => 'assets/images/course/5.jpg'],
+    'bank' => ['name' => 'Bankada', 'icon' => 'mdi-bank', 'color' => 'indigo', 'description' => 'Bankada hesap işlemleri ve finansal iletişim diyalogları', 'duration' => '2:50', 'thumbnail' => 'assets/images/course/6.jpg']
 ];
 
 // Video URL'leri (Gerçek URL'lerle değiştirilecek)

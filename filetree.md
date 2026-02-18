@@ -383,3 +383,87 @@ Toplam 18 dosya güncellendi. Artık tüm sayfalarda tarayıcı sekmesinde Multi
   - 4'lü özellik kartları (CEFR, Video, Altyazı, Sertifika)
   - Dashboard ile uyumlu inline style tasarım
   - Responsive grid (1 sütun mobil, 2 tablet, 4 desktop)
+
+
+## Git Repository (2026-02-18)
+- Remote: https://github.com/Drerkankurnaz/multitalk.git
+- Branch: main
+- İlk push: 2026-02-18
+- Commit: "MultiTalk - Diyaloglarla Yabancı Dil Öğretimi LMS"
+- .gitignore - 2026-02-18 - Güncellendi: .mp4 dosyaları ve video dizinleri hariç tutuldu
+
+
+## Altyazı / Diyalog Metni Desteği (2026-02-18)
+
+### Yeni Dosyalar
+- database-migration-subtitles.sql - 2026-02-18 - Altyazı veritabanı migration ve 8 dil için diyalog verileri
+
+### Güncellenen Dosyalar
+- lms-video.php - 2026-02-18 - Altyazı paneli eklendi
+  - Video altında açılır/kapanır diyalog metni paneli
+  - Kişi A (mor) ve Kişi B (pembe) renk kodlu satırlar
+  - Font boyutu değiştirme (A-/A+)
+  - Satır vurgulama modu
+  - Diyalog metnini kopyalama butonu
+  - Hover efektleri (satır kaydırma)
+  - Responsive tasarım (mobil uyumlu)
+
+### Veritabanı Değişiklikleri
+- videos tablosuna `subtitle_text` sütunu eklendi (TEXT)
+- 8 dil × 9 video = 72 diyalog metni eklendi
+- Diller: TR, EN, DE, FR, ES, IT, RU, AR
+- Her video için gerçekçi günlük yaşam diyalogları
+
+### Diyalog Temaları (Her Dilde)
+1. Tanışma ve Selamlaşma
+2. Günlük Rutinler
+3. Alışveriş
+4. Restoran
+5. Yol Tarifi
+6. Hastane
+7. Seyahat ve Ulaşım
+8. Hava Durumu
+9. Hobiler ve İlgi Alanları
+
+
+## Vimeo Video Entegrasyonu ve Kurs İçerik Güncelleme (2026-02-18)
+
+### Yeni Dosyalar
+- update-videos-vimeo.sql - 2026-02-18 - Vimeo video linkleri ve yeni konu başlıkları SQL migration
+
+### Güncellenen Dosyalar
+- lms-video.php - 2026-02-18 - Vimeo iframe embed desteği eklendi (hem mp4 hem Vimeo)
+- config.php - 2026-02-18 - Temalar 8'den 15'e güncellendi
+
+### Kurs İçerik Başlıkları (15 Konu)
+1. Giriş
+2. Yolda (Vimeo)
+3. Telefonda (Vimeo)
+4. Üniversitede
+5. Süpermarkette (Vimeo)
+6. Evde
+7. Restoranda (Vimeo)
+8. Mağazada (Vimeo)
+9. Garda (Vimeo)
+10. Otelde (Vimeo) - YENİ
+11. Şehirde - YENİ
+12. Düğünde (Vimeo) - YENİ
+13. Hastanede (Vimeo) - YENİ
+14. Eczanede (Vimeo) - YENİ
+15. Bankada (Vimeo) - YENİ
+
+### Veritabanı
+- 8 dil × 15 video = toplam 120 video kaydı
+- 88 video Vimeo embed linkli (11 konu × 8 dil)
+- 32 video henüz linksiz (4 konu × 8 dil: Giriş, Üniversitede, Evde, Şehirde)
+
+
+## Sertifika İndirme Düzeltmesi (2026-02-18)
+
+### Güncellenen Dosyalar
+- lms-certificate.php - 2026-02-18 - Sertifika indirme sorunu düzeltildi
+  - PNG olarak indirme butonu eklendi (html2canvas kütüphanesi)
+  - İndirme sırasında loading animasyonu
+  - Dil parametresi düzeltmesi (session'dan seçili dil alınıyor)
+  - Yazdır butonu korundu
+  - Responsive buton grubu (İndir + Yazdır)

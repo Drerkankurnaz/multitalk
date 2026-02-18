@@ -5,7 +5,7 @@ require_once 'php/video.php';
 
 $auth = new Auth();
 if (!$auth->isLoggedIn()) {
-    header('Location: lms-login.php');
+    header('Location: login.php');
     exit;
 }
 
@@ -118,12 +118,82 @@ $completedCount = count(array_filter($allVideos, fn($v) => $v['completed']));
                     </div>
                     <!-- Player -->
                     <div style="background:#000;">
+                        <?php
+                        $videoUrl = $video['video_url'];
+                        $isVimeo = strpos($videoUrl, 'vimeo.com') !== false;
+                        if ($isVimeo): ?>
+                        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+                            <iframe id="videoPlayer" src="<?php echo htmlspecialchars($videoUrl); ?>?autoplay=0&title=0&byline=0&portrait=0" 
+                                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" 
+                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <?php else: ?>
                         <video id="videoPlayer" style="width:100%;aspect-ratio:16/9;display:block;" controls>
-                            <source src="<?php echo htmlspecialchars($video['video_url']); ?>" type="video/mp4">
+                            <source src="<?php echo htmlspecialchars($videoUrl); ?>" type="video/mp4">
                             Tarayıcınız video etiketini desteklemiyor.
                         </video>
+                        <?php endif; ?>
                     </div>
                 </div>
+
+                <!-- Altyazı / Diyalog Paneli -->
+                <?php if (!empty($video['subtitle_text'])): ?>
+                <div id="subtitlePanel" style="background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;margin-bottom:20px;">
+                    <!-- Altyazı Header -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e2e8f0;cursor:pointer;" onclick="toggleSubtitle()">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#c026d3);display:flex;align-items:center;justify-content:center;">
+                                <i class="mdi mdi-subtitles-outline" style="color:#fff;font-size:18px;"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin:0;font-size:15px;font-weight:700;color:#0f172a;">
+                                    <?php echo $currentLang['flag']; ?> Diyalog Metni
+                                </h3>
+                                <p style="margin:0;font-size:12px;color:#94a3b8;">Altyazı / Subtitle</p>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span id="subtitleFontLabel" style="font-size:11px;color:#94a3b8;background:#f1f5f9;padding:3px 8px;border-radius:6px;">Normal</span>
+                            <i id="subtitleArrow" class="mdi mdi-chevron-down" style="color:#94a3b8;font-size:22px;transition:transform 0.3s;"></i>
+                        </div>
+                    </div>
+                    <!-- Altyazı İçerik -->
+                    <div id="subtitleContent" style="padding:0 20px 20px;display:block;">
+                        <!-- Kontroller -->
+                        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #f1f5f9;margin-bottom:12px;">
+                            <button onclick="changeSubFontSize(-1)" style="width:32px;height:32px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:#64748b;" title="Küçült">A-</button>
+                            <button onclick="changeSubFontSize(1)" style="width:32px;height:32px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:#64748b;" title="Büyüt">A+</button>
+                            <div style="width:1px;height:20px;background:#e2e8f0;"></div>
+                            <button onclick="toggleHighlight()" id="highlightBtn" style="height:32px;padding:0 10px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;color:#64748b;" title="Satır vurgulama">
+                                <i class="mdi mdi-format-color-highlight"></i> Vurgula
+                            </button>
+                            <button onclick="copySubtitle()" style="height:32px;padding:0 10px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px;color:#64748b;" title="Kopyala">
+                                <i class="mdi mdi-content-copy"></i> Kopyala
+                            </button>
+                        </div>
+                        <!-- Diyalog Satırları -->
+                        <div id="subtitleLines" style="font-size:15px;line-height:2;">
+                            <?php
+                            $rawText = $video['subtitle_text'];
+                            // Hem gerçek newline hem de literal \n'yi destekle
+                            $rawText = str_replace("\\n", "\n", $rawText);
+                            $lines = explode("\n", $rawText);
+                            foreach ($lines as $idx => $line):
+                                $line = trim($line);
+                                if (empty($line)) continue;
+                                $isPersonA = ($idx % 2 === 0);
+                                $dotColor = $isPersonA ? '#7c3aed' : '#c026d3';
+                                $bgColor = $isPersonA ? '#f5f3ff' : '#fdf4ff';
+                            ?>
+                            <div class="subtitle-line" style="padding:8px 12px;border-radius:10px;margin-bottom:6px;background:<?php echo $bgColor; ?>;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
+                                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:<?php echo $dotColor; ?>;margin-right:8px;vertical-align:middle;"></span>
+                                <span style="color:#1e293b;"><?php echo htmlspecialchars($line); ?></span>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 <!-- Controls -->
                 <div style="background:#fff;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.06);padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
@@ -189,14 +259,78 @@ $completedCount = count(array_filter($allVideos, fn($v) => $v['completed']));
         </div>
     </div>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-        const video = document.getElementById('videoPlayer');
         const form = document.getElementById('completeForm');
+        <?php if ($isVimeo): ?>
+        const iframe = document.getElementById('videoPlayer');
+        const vimeoPlayer = new Vimeo.Player(iframe);
+        vimeoPlayer.on('ended', function() {
+            if (confirm('Video tamamlandı! Tamamlandı olarak işaretlensin mi?')) {
+                form.submit();
+            }
+        });
+        <?php else: ?>
+        const video = document.getElementById('videoPlayer');
         video.addEventListener('ended', function() {
             if (confirm('Video tamamlandı! Tamamlandı olarak işaretlensin mi?')) {
                 form.submit();
             }
         });
+        <?php endif; ?>
+
+        // Altyazı fonksiyonları
+        let subFontSize = 15;
+        let subtitleOpen = true;
+        let highlightActive = false;
+
+        function toggleSubtitle() {
+            const content = document.getElementById('subtitleContent');
+            const arrow = document.getElementById('subtitleArrow');
+            subtitleOpen = !subtitleOpen;
+            content.style.display = subtitleOpen ? 'block' : 'none';
+            arrow.style.transform = subtitleOpen ? 'rotate(0deg)' : 'rotate(-90deg)';
+        }
+
+        function changeSubFontSize(delta) {
+            subFontSize = Math.max(12, Math.min(24, subFontSize + delta));
+            const lines = document.getElementById('subtitleLines');
+            if (lines) {
+                lines.style.fontSize = subFontSize + 'px';
+                const label = document.getElementById('subtitleFontLabel');
+                if (subFontSize <= 13) label.textContent = 'Küçük';
+                else if (subFontSize <= 16) label.textContent = 'Normal';
+                else if (subFontSize <= 19) label.textContent = 'Büyük';
+                else label.textContent = 'Çok Büyük';
+            }
+        }
+
+        function toggleHighlight() {
+            highlightActive = !highlightActive;
+            const btn = document.getElementById('highlightBtn');
+            btn.style.background = highlightActive ? '#7c3aed' : '#f8fafc';
+            btn.style.color = highlightActive ? '#fff' : '#64748b';
+            btn.style.borderColor = highlightActive ? '#7c3aed' : '#e2e8f0';
+            const allLines = document.querySelectorAll('.subtitle-line');
+            allLines.forEach(function(line) {
+                if (highlightActive) {
+                    line.onmouseover = function() { this.style.background='#fef3c7'; this.style.transform='translateX(4px)'; };
+                    line.onmouseout = function() { this.style.background = (Array.from(allLines).indexOf(this) % 2 === 0) ? '#f5f3ff' : '#fdf4ff'; this.style.transform='translateX(0)'; };
+                } else {
+                    line.onmouseover = function() { this.style.transform='translateX(4px)'; };
+                    line.onmouseout = function() { this.style.transform='translateX(0)'; };
+                }
+            });
+        }
+
+        function copySubtitle() {
+            const lines = document.querySelectorAll('.subtitle-line span:last-child');
+            let text = '';
+            lines.forEach(function(s) { text += s.textContent.trim() + '\n'; });
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Diyalog metni kopyalandı!');
+            });
+        }
     </script>
 </body>
 </html>
