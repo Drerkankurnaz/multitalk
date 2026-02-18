@@ -37,9 +37,10 @@ files/
 .env
 .env.local
 
-# Database (eğer SQLite kullanılırsa)
+# Database
 *.sqlite
 *.db
+init.sql
 
 # Backup files
 *.bak

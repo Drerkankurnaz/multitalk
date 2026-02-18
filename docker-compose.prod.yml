@@ -1,0 +1,44 @@
+services:
+  web:
+    build: .
+    container_name: multitalk-web
+    ports:
+      - "80:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=lms_db
+      - DB_USER=lms_user
+      - DB_PASS=${DB_PASS:-lms_pass_DEGISTIR}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    container_name: multitalk-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASS:-root_DEGISTIR}
+      MYSQL_DATABASE: lms_db
+      MYSQL_USER: lms_user
+      MYSQL_PASSWORD: ${DB_PASS:-lms_pass_DEGISTIR}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:

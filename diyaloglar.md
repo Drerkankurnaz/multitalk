@@ -1,8 +1,8 @@
-Diyaloglar ile İngilizce Tematik Diyalog İçerikleri 
- 
-TEMA	
-YOLDA
-	Clara: Excuse me, I am new in the city. How can I go to University of London? 
+# Diyaloglar ile İngilizce Tematik Diyalog İçerikleri
+
+## TEMA: YOLDA
+
+Clara: Excuse me, I am new in the city. How can I go to University of London? 
 John: University of London is on Malet Street. 
 Clara: Is it far? 
 Clara: No, it is close. You can walk there. It takes about 15 minutes. 
@@ -36,9 +36,10 @@ Clara: Great! My number is 2071484567.
 John: I’ll call you. See you! 
 Clara: See you!
 
-TEMA	
-TELEFONDA
-	Jane: Hello.
+
+## TEMA: TELEFONDA
+
+Jane: Hello.
 John: Hi, Clara.
 Jane: Excuse me, who is this?
 John: This is John. Who am I talking to?
@@ -63,10 +64,11 @@ Clara: Oh, I have a class at that time. My class ends at three. Does three o'clo
 John: Yes, it does. See you at three then.
 Clara: See you!
 
-TEMA	
-ÜNİVERSİTEDE
-Bir cafe ortamında
-	Clara: Hello everyone!
+
+## TEMA: ÜNİVERSİTEDE
+### Bir cafe ortamında
+
+Clara: Hello everyone!
 John: Hi! How are you?
 Clara: Thanks, I'm fine. And you?
 John: I'm fine too. This is my friend Clara. She is from Cambridge. 
@@ -93,9 +95,10 @@ John: Oh my God! I'm so late, sorry, I have class at 14.00.
 Clara: Bye!
 John: See you!
 
-TEMA	
-SÜPERMARKETTE
-	Clara: Excuse me, where are the potatoes? 
+
+## TEMA: SÜPERMARKETTE
+
+Clara: Excuse me, where are the potatoes? 
 Seller: Over there, in the front, in the vegetable section. 
 Clara: I looked there but I couldn't see them.
 Seller: In front on the right, right at the entrance. 
@@ -140,9 +143,10 @@ Clara: Are you sure?
 John: Yes.
 Clara: Thanks a lot for your help.
 
-TEMA	
-EVDE
-	Clara: Welcome. 
+
+## TEMA: EVDE
+
+Clara: Welcome. 
 John: Thanks for the invitation. Where can I hang my coat?
 Clara: In the cupboard here. 
 John: Thank you.
@@ -186,9 +190,10 @@ John: Now it's time to eat. Are you hungry? I know a good restaurant nearby. Sha
 Clara: I'm starving. My stomach is rumbling. 
 John: Come on then, let's go eat!
 
-TEMA	
-RESTORANDA
-	John: We're finally here. Let's go inside.
+
+## TEMA: RESTORANDA
+
+John: We're finally here. Let's go inside.
 Waiter: Good afternoon, welcome to our restaurant. Do you have a reservation? 
 John: No, I'm afraid not. Do you have a free table for two? 
 Waiter: Yes, no problem. Where would you like to sit? 

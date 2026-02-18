@@ -467,3 +467,10 @@ Toplam 18 dosya güncellendi. Artık tüm sayfalarda tarayıcı sekmesinde Multi
   - Dil parametresi düzeltmesi (session'dan seçili dil alınıyor)
   - Yazdır butonu korundu
   - Responsive buton grubu (İndir + Yazdır)
+
+
+## Canlıya Alma (Deploy) Dosyaları (2026-02-18)
+- docker-compose.prod.yml - 2026-02-18 - Production Docker Compose (phpMyAdmin yok, güvenli)
+- .env.example - 2026-02-18 - Ortam değişkenleri örnek dosyası
+- init.sql - 2026-02-18 - Veritabanı dump (ilk kurulumda otomatik yüklenir)
+- DEPLOY.md - 2026-02-18 - Canlıya alma rehberi (VPS, Railway, Render)
