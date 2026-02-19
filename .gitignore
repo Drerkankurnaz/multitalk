@@ -40,7 +40,6 @@ files/
 # Database
 *.sqlite
 *.db
-init.sql
 
 # Backup files
 *.bak
